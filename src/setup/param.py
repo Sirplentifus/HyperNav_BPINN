@@ -1,6 +1,7 @@
 class Param:
     """Initializer"""
     def __init__(self, hp, args):
+        # hp: config dictionary, resulting from reading the config file (located in config/) with function load_json
 
         self.problem   = hp["general"]["problem"]   # problem used
         self.case_name = hp["general"]["case_name"] # case used
