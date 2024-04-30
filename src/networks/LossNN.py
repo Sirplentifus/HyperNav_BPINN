@@ -56,7 +56,7 @@ class LossNN(PhysNN):
         log_var = tf.math.log(1/self.vars["bnd"]**2)
         return self.__loss_data(outputs[0], data["sol"], log_var)
 
-    def __loss_residual(self, data):
+    def __loss_residual(self, data):  # where the NN is derived with respect to inputs
         """ Physical loss; computation of the residual of the PDE """
         inputs = self.tf_convert(data["dom"])
         with tf.GradientTape(persistent=True) as tape:

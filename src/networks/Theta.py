@@ -77,6 +77,6 @@ class Theta():
     def copy(self): 
         """ Returns a Theta object with copied self.values """
         return Theta(self.values.copy())
-    def normal(self, mean=0.0, std=1.0): 
+    def normal(self, mean=0.0, std=1.0):  # only dependency on self is to get the right number of variables and the right shapes for them
         """ Creation of a Theta object with random normal initialization of self.values """
         return Theta([tf.random.normal(t.shape, mean=mean, stddev=std) for t in self.values])

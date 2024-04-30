@@ -87,7 +87,7 @@ class HMC(Algorithm):
     def sample_theta(self, theta_0):
         """ Samples one parameter vector given its previous value """
         self.__full_loss = self.curr_ep > self.burn_in
-        r_0 = theta_0.normal(self.HMC_eta) 
+        r_0 = theta_0.normal(self.HMC_eta)  # random momentum variable. does not depend on values in theta_0, only on shape
         r   = r_0.copy()
         theta = theta_0.copy()
         for _ in range(self.HMC_L):
