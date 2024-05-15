@@ -71,6 +71,9 @@ class Theta():
     def ssum(self): 
         """ Squared sum of all entries of self.values """
         return sum([tf.norm(t)**2    for t in self.values])
+    def sum(self):
+        """ sum of all entries of self.values """
+        return sum([tf.reduce_sum(t)    for t in self.values])
     def size(self): 
         """ Counter of all entries of self.values """
         return sum([np.prod(t.shape) for t in self.values])

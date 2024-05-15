@@ -1,4 +1,5 @@
 import numpy as np
+import tensorflow as tf
 
 def trajectory_propagator(x0, tArray, k):
     # given initial state x0, array of time values tArray, and the dynamics parameters k, 
@@ -19,7 +20,8 @@ def trajectory_propagator(x0, tArray, k):
     r = A * np.sin(w*tArray + phi)
     v = A * w * np.sin(w*tArray + phi)
 
-    return np.vstack((r,v))
+    # return np.vstack((r,v)).T
+    return np.stack((r,v), axis=1)
 
 def dynamics(xArray, tArray, k):
     # computes the derivative of the state from known (or assumed) dynamics
@@ -27,9 +29,10 @@ def dynamics(xArray, tArray, k):
     # time, but in general the dynamics might depend on it, which is why
     # the argument tArray is here
 
-    rdot = xArray[1,:]
-    vdot = -k*xArray[0,:]
-    return np.vstack((rdot,vdot))
+    rdot = xArray[:,1]
+    vdot = -k*xArray[:,0]
+    return tf.stack((rdot,vdot), axis=1)
+    # return np.vstack((rdot,vdot)).T
 
 # an example
 if __name__ == "__main__":
