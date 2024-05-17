@@ -30,6 +30,7 @@ class my_HMC:
         self.HMC_dt  = param_method["HMC_dt"] 
         self.HMC_eta = param_method["HMC_eta"]
         self.selected = list()
+        self.hamiltonians = []
         
 
     def __leapfrog_step(self, old_theta, r, dt):
@@ -71,10 +72,12 @@ class my_HMC:
             if self.debug_flag: print("\tACCEPT")
             theta = theta[1]
             self.selected.append(True)
+            self.hamiltonians.append(h1)
         else:
             if self.debug_flag: print("\tREJECT")
             theta = theta[0]
             self.selected.append(False)
+            self.hamiltonians.append(h0)
 
         acc_rate = f"{100*sum(self.selected)/len(self.selected):1.2f}%"
         if self.debug_flag:

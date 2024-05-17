@@ -10,15 +10,15 @@ def trajectory_propagator(x0, tArray, k):
     r0 = x0[0]  # initial position
     v0 = x0[1]  # initial velocity
 
-    A = np.sqrt(r0**2 + v0**2/k)  # amplitude
     w = np.sqrt(k)  # angular velocity
+    A = np.sqrt(r0**2 + v0**2/k)  # amplitude
 
     s_phi = r0/A
     c_phi = v0/A/w
     phi = np.arctan2(s_phi, c_phi)
 
     r = A * np.sin(w*tArray + phi)
-    v = A * w * np.sin(w*tArray + phi)
+    v = A * w * np.cos(w*tArray + phi)
 
     # return np.vstack((r,v)).T
     return np.stack((r,v), axis=1)
